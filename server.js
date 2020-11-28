@@ -1,11 +1,10 @@
-const express = require('express')
+const express = require('express');
+const server = express();
 
-const server = express()
-
-server.use(express.json())
+server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.send('<h1>Hello World</h1>')
-})
+	res.send('<h1>Hello World</h1>');
+});
 
-module.exports = server
+module.exports = server;
