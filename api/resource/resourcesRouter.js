@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-const { resource } = require('../../server');
-const db = require('./model');
+const { resource } = require('../server');
+const db = require('./resourcesModel');
 
 router.use('/:id', verifyId);
 

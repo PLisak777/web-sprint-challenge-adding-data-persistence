@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const db = require('./model');
+const db = require('./projectsModel');
 
 router.use('/:id', verifyId);
 
