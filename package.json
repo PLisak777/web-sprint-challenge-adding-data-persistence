@@ -4,17 +4,26 @@
   "description": "Data Persistence Challenge",
   "main": "index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=testing jest --watch --verbose --runInBand --silent"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "server": "nodemon index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LambdaSchool/web-sprint-challenge-adding-data-persistence.git"
+    "url": "git+https://github.com/PLisak777/web-sprint-challenge-adding-data-persistence"
   },
   "license": "ISC",
   "devDependencies": {
     "cross-env": "^7.0.2",
     "eslint": "^7.13.0",
     "jest": "^26.6.3",
+    "nodemon": "^2.0.6",
     "supertest": "^6.0.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "knex": "^0.21.12",
+    "sqlite3": "^5.0.0"
   }
 }
