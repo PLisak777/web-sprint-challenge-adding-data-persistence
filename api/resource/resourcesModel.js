@@ -1,4 +1,6 @@
-const db = require('knex')(require('../../knexfile').development);
+const knex = require('knex')
+const config = require('../../knexfile')
+const db = knex(config.development)
 
 function getResources() {
 	return db('resources');

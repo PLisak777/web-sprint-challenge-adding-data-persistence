@@ -1,12 +1,11 @@
-const router = require('express').Router();
-
-const { resource } = require('../server');
-const db = require('./resourcesModel');
+const express = require('express');
+const router = express.Router();
+const Resources = require('./resourcesModel');
 
 router.use('/:id', verifyId);
 
 router.get('/', (req, res) => {
-	db.getResources()
+	Resources.getResources()
 		.then((resources) => {
 			res.status(200).json(resources);
 		})
@@ -19,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', verifyResourceSchema, (req, res) => {
-	db.addResource(req.body)
+	Resources.addResource(req.body)
 		.then((resource) => {
 			res.status(201).json(resource);
 		})
@@ -38,7 +37,7 @@ router.get('/:id', (req, res) => {
 router.get('/:id/projects', (req, res) => {
 	const { id } = req.params;
 
-	db.getProjectsByResource(id).then((projects) => {
+	Resources.getProjectsByResource(id).then((projects) => {
 		res.status(200).json(projects);
 	});
 });
@@ -46,7 +45,7 @@ router.get('/:id/projects', (req, res) => {
 function verifyId(req, res, next) {
 	const { id } = req.params;
 
-	db.getResourceById(id)
+	Resources.getResourceById(id)
 		.then((resource) => {
 			req.resource = resource;
 			next();

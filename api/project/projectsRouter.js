@@ -1,11 +1,11 @@
-const router = require('express').Router();
-
-const db = require('./projectsModel');
+const express = require('express')
+const router = express.Router()
+const Projects = require('./projectsModel')
 
 router.use('/:id', verifyId);
 
 router.get('/', (req, res) => {
-	db.getProjects()
+	Projects.getProjects()
 		.then((projects) => {
 			res.status(200).json(projects);
 		})
@@ -23,7 +23,7 @@ router.get('/:id', (req, res) => {
 
 router.get('/:id/tasks', (req, res) => {
 	const { id } = req.params;
-	db.getProjectTasks(id)
+	Projects.getProjectTasks(id)
 		.then((tasks) => {
 			res.status(200).json(tasks);
 		})
@@ -37,7 +37,7 @@ router.get('/:id/tasks', (req, res) => {
 
 router.get('/:id/resources', (req, res) => {
 	const { id } = req.params;
-	db.getProjectResources(id)
+	Projects.getProjectResources(id)
 		.then((resources) => {
 			res.status(200).json(resources);
 		})
@@ -50,7 +50,7 @@ router.get('/:id/resources', (req, res) => {
 });
 
 router.post('/', verifyProjectSchema, (req, res) => {
-	db.addProject(req.body)
+	Projects.addProject(req.body)
 		.then((project) => {
 			res.status(201).json(project);
 		})
@@ -63,7 +63,7 @@ router.post('/', verifyProjectSchema, (req, res) => {
 });
 
 router.post('/:id/tasks', verifyTaskSchema, (req, res) => {
-	db.addTaskToProject(req.body)
+	Projects.addTaskToProject(req.body)
 		.then((task) => {
 			res.status(201).json(task);
 		})
@@ -76,7 +76,7 @@ router.post('/:id/tasks', verifyTaskSchema, (req, res) => {
 });
 
 router.post('/:id/resources', (req, res) => {
-	db.addResourceToProject(req.project.id, req.body.id)
+	Projects.addResourceToProject(req.project.id, req.body.id)
 		.then((id) => {
 			res.status(201).json({
 				message: `Added ${req.body.name} to ${req.project.name}`,
@@ -115,7 +115,7 @@ function verifyProjectSchema(req, res, next) {
 
 function verifyId(req, res, next) {
 	const { id } = req.params;
-	db.getProjectsById(id).then((project) => {
+	Projects.getProjectsById(id).then((project) => {
 		if (project) {
 			req.project = project;
 			next();
